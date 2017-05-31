@@ -1,0 +1,31 @@
+@import "../../../assets/mixins/prefix-mixin.scss";
+$btn-color: #363636;
+
+.search{
+  width: 500px;
+  margin-top: 10px;
+  background: blue;
+  input{
+    float: left;
+    width: 50%;
+    padding: 5px 5px 5px 5px;
+    font-size: 20px;
+    color: #8b8b8b;
+  }
+
+  .search-button{
+    float: left;
+    background: $btn-color;
+    border: none;
+    text-decoration: none;
+    outline: 0;
+    padding: 5px 5px 5px 5px;
+    font-size: 23px;
+    color: #ffffff;
+    @include includeThing("transition", "background-color 0.2s")
+
+    &:hover{
+      background: lighten($btn-color, 10%);
+    }
+  }
+}

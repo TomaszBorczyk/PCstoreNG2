@@ -1,0 +1,73 @@
+@import "../../assets/mixins/prefix-mixin.scss";
+
+body{
+  .pyramid{
+    width: 160px;
+    height: 160px;
+    margin: auto;
+    margin-left: 70px;
+    .trian{
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 20px 34.6px 20px;
+      border-color: transparent transparent #ffffff transparent;
+    }
+
+    @for $i from 1 through 4{
+      .trian-#{$i}{
+        @include animation('flip-triangle 1s infinite ease-in-out');
+        @include animation-delay($i/10*1s);
+      }
+    }
+
+    .trian-1-row{
+      margin: auto;
+      .trian{
+        margin: auto;
+        margin-right: 100px;
+      }
+    }
+    .trian-2-row{
+      margin: auto;
+      height: 40px;
+
+      .trian{
+        float: left;
+      }
+
+      .trian-2, .trian-3{
+        margin-right: -20px;
+      }
+
+      .trian-3{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 34.6px 20px 0 20px;
+        border-color: #ffffff transparent transparent transparent;
+        // @include includeThing('animation','flip-triangle 1s infinite ease-in-out 1s, rotate-triangle 1s infinite ease-in-out 1s');
+        // @include animation-delay(1s, 10s);
+      }
+
+
+    }
+  }
+
+  @include keyframes(flip-triangle){
+    0%, 70%, 100%{
+      transform: scale3d(1,1,1);
+    } 40%{
+      transform: scale3d(0,0,1);
+    }
+  };
+
+  @include keyframes(rotate-triangle){
+    from{
+      transform: rotate(0deg);
+    }to{
+      transform: rotate(360deg);
+    }
+  };
+
+}

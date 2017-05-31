@@ -1,0 +1,63 @@
+@import "../../assets/mixins/prefix-mixin.scss";
+$item-bg: #ffffff;
+
+    .wrapper{
+      background: $item-bg;
+      padding: 20px 20px 20px 20px;
+      @include includeThing("transition", "background 0.2s ease-in-out");
+      &:hover{
+        background: darken($item-bg, 20%);
+      }
+      .image{
+        text-align: center;
+
+        img{
+        }
+      }
+      .section1{
+        padding-left: 20px;
+        float:left;
+        .title{
+          font-size: 30px;
+        }
+        .brand{
+          padding-top: 5px;
+          font-size: 20px;;
+          color: rgba(#c9c9c9, 0.71);
+        }
+      }
+
+      .section2{
+        float: right;
+        .price{
+          font-size: 35px;
+          text-align: right;
+        }
+
+        .amount{
+          font-size: 18px;
+          ul{
+            list-style: none;
+            float: right;
+            li{
+              .add-cart-button{
+                float: right;
+                background: #000000;
+                border: none;
+                text-decoration: none;
+                padding: 7px 7px 7px 7px;
+                margin-top: 5px;
+                color: #ffffff;
+                outline: 0;
+                font-size: 15px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    @media query {
+
+    }
