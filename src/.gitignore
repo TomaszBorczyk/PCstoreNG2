@@ -1,8 +1,0 @@
-node_modules/*
-__pycache__/
-polyfills.js
-app.js
-/Include
-/Lib
-/Scripts
-/tcl
