@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit{
   category:string;
   subscription:Subscription;
   products:Array<ProductModel>;
+  bestsellers:Array<number>;
   categories:Array<CategoryModel> = [
     new CategoryModel('cpus', 'Procesory')
   ]
@@ -30,6 +31,8 @@ export class ProductsComponent implements OnInit{
     this.handleSearchQuery("");
     this.subscription = this.sharedService.getEmittedValue()
                       .subscribe(item => this.handleSearchQuery(item));
+
+    this.getBestsellers();
 
     this.activatedRoute.params.subscribe((params: Params) => {
         let categObj:CategoryModel = this.categories.find(obj => obj.id==params['category']);
@@ -44,6 +47,11 @@ export class ProductsComponent implements OnInit{
   private handleSearchQuery(searchQuery:string){
     this.api.fetchProducts(searchQuery)
             .then(object => this.products = object);
+  }
+
+  private getBestsellers(){
+    this.api.getBestsellers()
+            .then(object => this.bestsellers = object );
   }
 
 }

@@ -1,7 +1,11 @@
 <!-- <h1>{{category}} search: {{name}}</h1> -->
 <div class="row">
   <aside class="col-md-2">
-    TEXT TEXT TEXT
+    <ul>
+      <li *ngFor="let id of bestsellers">
+        {{id}}
+      </li>
+    </ul>
   </aside>
 
   <div class="col-md-10">

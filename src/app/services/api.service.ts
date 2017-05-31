@@ -12,18 +12,38 @@ export class ApiService{
   constructor(private http:Http){}
 
   fetchProducts(searchQuery:string):Promise<Array<ProductModel>>{
-    return this.http.get(this.apiServer+'products?search='+searchQuery)
+    return this.http.get(this.apiServer+'products/?search='+searchQuery)
                     .toPromise()
                     .then((res:Response) => res.json()
-                    .map(object => new ProductModel(
-                      object.id,
-                      object.name,
-                      object.uuid,
-                      object.category,
-                      object.brand,
-                      object.amount,
-                      object.totalRating,
-                      object.price))
-                  );
+                    .map(json => {
+                      let product:ProductModel = Object.assign(new ProductModel(), json);
+                      return product;
+                    }));
+
+
+
+
+                  //   .map(object => new ProductModel(
+                  //     object.id,
+                  //     object.name,
+                  //     object.uuid,
+                  //     object.category,
+                  //     object.brand,
+                  //     object.amount,
+                  //     object.totalRating,
+                  //     object.price))
+                  // );
+  }
+
+
+  getBestsellers():Promise<Array<number>>{
+    return this.http.get(this.apiServer+'orders/bestsellers/')
+                    .toPromise()
+                    .then((res:Response)=>{return res.json();})
+                    .then(element => element.top
+                    .map(element =>{
+                      let productId:number = element.product_id;
+                      return productId;
+                    }));
   }
 }
