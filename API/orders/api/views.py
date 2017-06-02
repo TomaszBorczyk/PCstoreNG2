@@ -8,6 +8,7 @@ from rest_framework.generics import (
                                     UpdateAPIView,
                                     )
 from orders.models import Order
+from products.models import Product
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
@@ -21,21 +22,16 @@ from products.api.serializers import ProductSerializer
 
 
 
-# class OrderTotalList(ListAPIView):
-#     queryset = Order.objects.all()
-    # serializer_class = OrderTotalSerializer
+class Bestsellers(ListAPIView):
+    serializer_class = ProductSerializer
 
-class Bestsellers(APIView):
-    renderer_classes = (JSONRenderer,)
-    # serializer_class = ProductSerializer
-
-    def get(self, request, format=None):
-    # def get_queryset(self):
+    def get_queryset(self):
+        top_list = []
         top = Order.products.through.objects.values('product_id').annotate(total=Count('product_id')).order_by('total')[:10]
-        content = {'top': top, }
-        return Response(content)
+        for product in top:
+            top_list.append(product['product_id'])
 
-
+        return Product.objects.filter(id__in=tuple(top_list))
 
 class OrderTotalList(APIView):
     """
@@ -52,6 +48,7 @@ class OrderTotalList(APIView):
         avg_products /=orders_count
         content = {'orders_count': orders_count, 'avg_products':avg_products}
         return Response(content)
+
 
 
 class OrderProductList(ListAPIView):

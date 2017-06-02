@@ -1,4 +1,4 @@
-import {ProductModel} from '../models/product/product.model';
+import {ProductModel} from '../../models/product/product.model';
 import { Component, Input } from '@angular/core';
 
 @Component({

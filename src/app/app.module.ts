@@ -12,13 +12,13 @@ import { NavBoxComponenet } from './nav-box/nav-box.component';
 import { MenuComponent } from './nav-box/menu/menu.component';
 import { SearchBoxComponent } from './nav-box/search-box/search-box.component';
 import { ContainerMainComponent } from './container-main/container-main.component';
-import { ProductsComponent } from './products/products.component';
-import { SingleProductComponent } from './single-product/single-product.component';
-
-import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 import { SharedService } from './services/shared.service';
 import { ApiService } from './services/api.service';
+import {AppRoutingModule} from './app-routing.module';
+import {ProductModule} from './products-module/product.module';
+
+import {UserModule} from './user-module/user.module';
 
 @NgModule({
   declarations: [
@@ -26,23 +26,17 @@ import { ApiService } from './services/api.service';
     NavBoxComponenet,
     MenuComponent,
     SearchBoxComponent,
-    ContainerMainComponent,
-    ProductsComponent,
-    SingleProductComponent,
-    ProductDetailComponent
+    ContainerMainComponent
   ],
   imports: [
     AlertModule.forRoot(),
+    ProductModule,
+    UserModule,
+    AppRoutingModule,
+    
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-        {path: 'products/:category', component: ProductsComponent},
-        {path: 'product/:id', component: ProductDetailComponent},
-        {path: 'products', component: ProductsComponent},
-        {path: '', redirectTo: 'products', pathMatch: 'full'},
-        {path: '**', redirectTo: 'products', pathMatch: 'full'}
-    ])
   ],
   providers: [SharedService,
               ApiService],

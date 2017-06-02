@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Inject} from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import {ProductModel} from '../models/product/product.model'
+import {User} from '../models/user.model';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -20,9 +21,6 @@ export class ApiService{
                       return product;
                     }));
 
-
-
-
                   //   .map(object => new ProductModel(
                   //     object.id,
                   //     object.name,
@@ -35,15 +33,40 @@ export class ApiService{
                   // );
   }
 
-
-  getBestsellers():Promise<Array<number>>{
+  getBestsellers():Promise<Array<ProductModel>>{
     return this.http.get(this.apiServer+'orders/bestsellers/')
                     .toPromise()
-                    .then((res:Response)=>{return res.json();})
-                    .then(element => element.top
-                    .map(element =>{
-                      let productId:number = element.product_id;
-                      return productId;
+                    .then((res:Response) => res.json()
+                    .map(json => {
+                      let product:ProductModel = Object.assign(new ProductModel(), json);
+                      return product;
                     }));
-  }
+                  }
+
+    createUser(user:User){
+      let body = JSON.stringify(user);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      console.log(body);
+      console.log( this.http.post(this.apiServer+'users/create/', body, options)
+                            .subscribe(
+                              data => {alert('ok');},
+                              error => {console.log(JSON.stringify(error.json()));}
+                            ));
+    }
+
+    // loginUser()
+
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body.data || {};
+    }
+
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server Error');
+    }
+
+
 }

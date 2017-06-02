@@ -1,0 +1,30 @@
+.register-box{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 37px;
+    position: absolute;;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 20px;
+    box-sizing: border-box;
+    form{
+      float: left;
+      width: 100%;
+      .form-group{
+        input{
+          border: none;
+          background: #bbbbbb;
+          padding: 10px;
+          border-radius: 0;
+
+        }
+      }
+      button{
+        border: none;
+        padding: 10px;
+        background-color: #49c36f;
+        color: white;
+      }
+    }
+}

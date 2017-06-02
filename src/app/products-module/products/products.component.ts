@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
-import {SharedService} from '../services/shared.service';
-import {ApiService} from '../services/api.service';
+import {SharedService} from '../../services/shared.service';
+import {ApiService} from '../../services/api.service';
 import {Subscription} from 'rxjs';
-import {ProductModel} from '../models/product/product.model';
-import {CategoryModel} from '../models/category.model';
+import {ProductModel} from '../../models/product/product.model';
+import {CategoryModel} from '../../models/category.model';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit{
   category:string;
   subscription:Subscription;
   products:Array<ProductModel>;
-  bestsellers:Array<number>;
+  bestsellers:Array<ProductModel>;
   categories:Array<CategoryModel> = [
     new CategoryModel('cpus', 'Procesory')
   ]

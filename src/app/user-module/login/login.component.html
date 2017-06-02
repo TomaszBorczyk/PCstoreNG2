@@ -1,0 +1,17 @@
+<div class="register-box">
+  <h2>Logowanie</h2>
+
+<form #registerForm = 'ngForm' (ngSubmit)="onSubmit(registerForm)" >
+  <div class="form-group">
+    <input type="text" class="form-control" id="email" required [(ngModel)]="email" name="email" #name="ngModel" placeholder="Email">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" id="name" required [(ngModel)]="password" name="password" #name="ngModel" placeholder="Hasło">
+  </div>
+
+  <button type="submit" name="button">Zaloguj</button>
+</form >
+
+
+</div>
