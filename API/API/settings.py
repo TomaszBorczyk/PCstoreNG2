@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'users.apps.UsersConfig',
+    'auth_user.apps.AuthUserConfig',
     'products.apps.ProductsConfig',
     'cpus.apps.CpusConfig',
     'gpus.apps.GpusConfig',

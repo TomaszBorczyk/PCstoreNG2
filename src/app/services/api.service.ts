@@ -20,17 +20,6 @@ export class ApiService{
                       let product:ProductModel = Object.assign(new ProductModel(), json);
                       return product;
                     }));
-
-                  //   .map(object => new ProductModel(
-                  //     object.id,
-                  //     object.name,
-                  //     object.uuid,
-                  //     object.category,
-                  //     object.brand,
-                  //     object.amount,
-                  //     object.totalRating,
-                  //     object.price))
-                  // );
   }
 
   getBestsellers():Promise<Array<ProductModel>>{
@@ -47,12 +36,11 @@ export class ApiService{
       let body = JSON.stringify(user);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      console.log(body);
-      console.log( this.http.post(this.apiServer+'users/create/', body, options)
+      this.http.post(this.apiServer+'users/create/', body, options)
                             .subscribe(
                               data => {alert('ok');},
                               error => {console.log(JSON.stringify(error.json()));}
-                            ));
+                            );
     }
 
     // loginUser()

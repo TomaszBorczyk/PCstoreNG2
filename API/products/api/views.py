@@ -4,6 +4,9 @@ from django.shortcuts import render
 from rest_framework.generics import (
                                     ListAPIView,
                                     CreateAPIView,
+                                    RetrieveAPIView,
+                                    UpdateAPIView,
+                                    DestroyAPIView
                                     )
 from products.models import Product
 from .serializers import (
@@ -12,7 +15,6 @@ from .serializers import (
 
 # Create your views here.
 class ProductList(ListAPIView):
-    # queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def get_queryset(self):
@@ -24,5 +26,17 @@ class ProductList(ListAPIView):
         return queryset
 
 class ProductCreate(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductDetail(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductUpdate(UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductDestroy(DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
